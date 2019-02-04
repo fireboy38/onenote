@@ -1,8 +1,10 @@
 CentOS6/Debian6/Ubuntu14 ShadowsocksR一键部署管理脚本（2018.11.21更新）：
 脚本一（2018.11.20更新）
 ________________________________________
-```yum -y install wget
-wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh&& chmod +x ssr.sh && bash ssr.sh
+```
+yum -y install wget
+wget -N --no-check-certificate 
+https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh&& chmod +x ssr.sh && bash ssr.sh
 
 ```
 
