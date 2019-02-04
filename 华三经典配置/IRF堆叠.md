@@ -4,11 +4,14 @@
    实现SWA与SWB之间的IRF堆叠
 ## 三、实验配置
 ### 1.SWA 保留缺省编号1，不需要进行配置；将SWB的成员编号修改为2。
+```
 <SWB> system-view
 [SWB] irf member 1 renumber 2
 Warning: Renumbering the switch number may result in configuration change or loss. Continue?[Y/N]:y
+```
 改完设备编号之后，重启设备 
 ### 2.在SWA上创建设备的IRF端口1/2，与物理端口T-GigabitEthernet1/0/50 绑定，并保存配置
+```
 [SWA] interface T-gigabitethernet 1/0/50
 [SWA-Ten-GigabitEthernet1/0/50] shutdown
 [SWA] irf-port 1/2
@@ -17,20 +20,23 @@ Warning: Renumbering the switch number may result in configuration change or los
 [SWA] interface T-gigabitethernet 1/0/50
 [SWA-Ten-GigabitEthernet1/0/50] undo shutdown
 [SWA-Ten-GigabitEthernet1/0/50] save
+```
 ### 3.在SWB上创建设备的IRF端口2/1，绑定物理端口GigabitEthernet2/0/50，并保存配置
+```
 [SWB] interface T-gigabitethernet 2/0/50
 [SWB-Ten-GigabitEthernet2/0/50] shutdown
-	[SWB] irf-port 2/1
-	[SWB-irf-port2/1] port group interface T-gigabitethernet 2/0/50
-	[SWB-irf-port2/1] quit
-	[SWB] interface T-gigabitethernet 2/0/50
-	[SWB-Ten-GigabitEthernet2/0/50] undo shutdown
-	[SWB-Ten-GigabitEthernet2/0/50] save
+[SWB] irf-port 2/1
+[SWB-irf-port2/1] port group interface T-gigabitethernet 2/0/50
+[SWB-irf-port2/1] quit
+[SWB] interface T-gigabitethernet 2/0/50
+[SWB-Ten-GigabitEthernet2/0/50] undo shutdown
+[SWB-Ten-GigabitEthernet2/0/50] save
+```
 激活SWA和SWB的IRF端口配置：
-	[SWA-Ten-GigabitEthernet1/0/50] quit
-	[SWA] irf-port-configuration active
-	[SWB-Ten-GigabitEthernet2/0/50] quit
-	[SWB] irf-port-configuration active
+[SWA-Ten-GigabitEthernet1/0/50] quit
+[SWA] irf-port-configuration active
+[SWB-Ten-GigabitEthernet2/0/50] quit
+[SWB] irf-port-configuration active
 两台设备间将会进行Master竞选，竞选失败的一方将自动重启，重启完成后，IRF形成，系统名称统一为SWA,即为主设备的sysname.
 四、实验检测
 	1.IRF堆叠成功，SWB的系统名称变为SWA，与主设备SWA统一。
