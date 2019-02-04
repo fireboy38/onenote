@@ -1,10 +1,8 @@
 # 一级标题实验一：盒式设备IRF堆叠实验
-一、实验组网
-
- 
-二、实验要求
-	实现SWA与SWB之间的IRF堆叠
-三、实验配置
+## 一、实验组网
+## 二、实验要求
+   实现SWA与SWB之间的IRF堆叠
+## 三、实验配置
 1.SWA 保留缺省编号1，不需要进行配置；将SWB的成员编号修改为2。
 	<SWB> system-view
 	[SWB] irf member 1 renumber 2
