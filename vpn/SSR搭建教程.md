@@ -106,7 +106,7 @@ chmod +x bbr.sh
 ________________________________________
 【SSR客户端下载】
 第一次电脑系统使用SSR/SS客户端时，如果提示你需要安装NET Framework 4.0，网上搜一下这个东西，安装一下即可。NET Framework 4.0是SSR/SS的运行库，没有这个SSR/SS客户端无法正常运行。有的电脑系统可能会自带NET Framework 4.0。
-Windows SSR客户端 [](下载地址) 备用下载地址
+Windows SSR客户端  [下载地址](https://github.com/shadowsocksr-backup/shadowsocksr-csharp/releases)
 MAC SSR客户端 下载地址 备用下载地址
 Linux客户端一键安装配置使用脚本(使用方法见注释) 或者采用图形界面的linux ssr客户端
 安卓SSR客户端 下载地址 备用下载地址
