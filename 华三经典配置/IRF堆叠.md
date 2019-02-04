@@ -106,24 +106,20 @@ Warning: Renumbering the switch number may result in configuration change or los
 [SWA-Vlan-interface2] mad ip address 192.168.2.2 24 member 2
 [SWA-Vlan-interface2] quit
 因为BFD MAD和生成树功能互斥，所以在Gi1/0/1 和Gi2/0/1 上关闭生成树协议
-	[SWA] interface Gi 1/0/1
-	[SWA-Ethernet1/0/1] undo stp enable
-	[SWA-Ethernet1/0/1] quit
-	[SWA] interface Git 2/0/1
-	[SWA-Ethernet2/0/1] undo stp enabl
- 
-四、实验检测
+[SWA] interface Gi 1/0/1
+[SWA-Ethernet1/0/1] undo stp enable
+[SWA-Ethernet1/0/1] quit
+[SWA] interface Git 2/0/1
+[SWA-Ethernet2/0/1] undo stp enabl
+```
+### 四、实验检测
 1、首先查看IRF堆叠情况，使用命令display irf 可以看到堆叠形成。
-
- 
 2、测试连通性，PC3与PC4都能ping通192.168.10.10
 3、断开IRF线缆，观察IRF状态，可以看到仅剩一台设备。
 
 1、 观察SWB，由于监测机制，SWB的所有端口处于DOWN状态。
  
-
- 
-五、注意事项与总结
+### 五、注意事项与总结
 1、BFD检测需要单独占用接口,并且被占用的端口不能走业务。BFD主设备地址生效，备设备地址不生效，BFD会话DOWN。当IRF2堆叠分裂时，两个地址同时生效。
 2、IRF系统通过日志提示用户修复IRF互联链路，链路修复后，冲突的设备重新启动，恢复IRF系统，被Down掉的端口将重新恢复业务转发；
 3、BFD MAD和STP、VPN功能互斥。
