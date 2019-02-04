@@ -1,4 +1,4 @@
-# 一级标题实验一：盒式设备IRF堆叠实验
+# 实验一：盒式设备IRF堆叠实验
 ## 一、实验组网
 ## 二、实验要求
    实现SWA与SWB之间的IRF堆叠
@@ -50,18 +50,20 @@ Warning: Renumbering the switch number may result in configuration change or los
 3. IRF激活后会进行IRF竞选。选举规则：1、当前Master优于非Master 2、成员优先级大的优先 3、系统运行时间长的优先 
 4、成员MAC小的优先。
 	 
-## 实验二：IRF结合BFD MAD检测
-### 一、实验组网
+# 实验二：IRF结合BFD MAD检测
+## 一、实验组网
 	
-### 二、实验要求
+## 二、实验要求
 实现SWA和SWB之间的IRF堆叠，并且使用BFD MAD检测使IRF之间一旦分裂能立即恢复业务。
-### 三、实验配置
-1.SWA 保留缺省编号1，不需要进行配置；将SWB的成员编号修改为2。
-	<SWB> system-view
-	[SWB] irf member 1 renumber 2
-	Warning: Renumbering the switch number may result in configuration change or loss. Continue?[Y/N]:y
-	改完设备编号之后，重启设备 
-2.在SWA上创建设备的IRF端口1/2，与物理端口T-GigabitEthernet1/0/50 绑定，并保存配置
+## 三、实验配置
+### 1.SWA 保留缺省编号1，不需要进行配置；将SWB的成员编号修改为2。
+```
+<SWB> system-view
+[SWB] irf member 1 renumber 2
+Warning: Renumbering the switch number may result in configuration change or loss. Continue?[Y/N]:y
+```
+改完设备编号之后，重启设备 
+### 2.在SWA上创建设备的IRF端口1/2，与物理端口T-GigabitEthernet1/0/50 绑定，并保存配置
 	[SWA] interface T 1/0/50
 	[SWA-Ten-GigabitEthernet1/0/50] shutdown
 	[SWA] irf-port 1/2
