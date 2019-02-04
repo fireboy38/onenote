@@ -47,15 +47,15 @@ Warning: Renumbering the switch number may result in configuration change or los
 ### 五、注意事项与总结
 1. S3600V2-EI系列交换机和S3600V2-SI系列交换机只能与本系列内的设备建立IRF，这两个系列的设备之间无法建立IRF；
 2. 修改成员编号后要进行断电重启生效。
-3. IRF激活后会进行IRF竞选。选举规则：1、当前Master优于非Master 2、成员优先级大的优先 3、系统运行时间长的优先 4、成员MAC小的优先。
+3. IRF激活后会进行IRF竞选。选举规则：1、当前Master优于非Master 2、成员优先级大的优先 3、系统运行时间长的优先 
+4、成员MAC小的优先。
 	 
-实验二：IRF结合BFD MAD检测
-一、实验组网
+## 实验二：IRF结合BFD MAD检测
+### 一、实验组网
 	
- 
-二、实验要求
-	实现SWA和SWB之间的IRF堆叠，并且使用BFD MAD检测使IRF之间一旦分裂能立即恢复业务。
-三、实验配置
+### 二、实验要求
+实现SWA和SWB之间的IRF堆叠，并且使用BFD MAD检测使IRF之间一旦分裂能立即恢复业务。
+### 三、实验配置
 1.SWA 保留缺省编号1，不需要进行配置；将SWB的成员编号修改为2。
 	<SWB> system-view
 	[SWB] irf member 1 renumber 2
