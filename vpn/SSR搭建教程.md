@@ -23,8 +23,10 @@ chmod +x shadowsocksR.sh
 ```
 ________________________________________
 ———————————————————代码分割线————————————————
-复制上面的脚本一代码到VPS服务器里，复制代码用鼠标右键的复制，然后在vps里面右键粘贴进去，因为ctrl+c和ctrl+v无效。接着按回车键，脚本会自动安装，以后只需要运行这个快捷命令就可以出现下图的界面进行设置，快捷管理命令为：bash ssr.sh
- 
+复制上面的脚本一代码到VPS服务器里，复制代码用鼠标右键的复制，然后在vps里面右键粘贴进去，因为ctrl+c和ctrl+v无效。接着按回车键，脚本会自动安装，以后只需要运行这个快捷命令就可以出现下图的界面进行设置，快捷管理命令为：
+```
+bash ssr.sh
+``` 
 如上图出现管理界面后，输入数字1来安装SSR服务端。如果输入1后不能进入下一步，那么请退出xshell，重新连接vps服务器，然后输入快捷管理命令bash ssr.sh 再尝试。
  
 根据上图提示，依次输入自己想设置的端口和密码 (密码建议用复杂点的字母组合，端口号为40-65535之间的数字)，回车键用于确认
@@ -57,17 +59,22 @@ ________________________________________
 【破解版锐速加速教程】
 此加速教程为破解版锐速加速,Vultr的服务器centos6系统官方进行了更新，导致目前不支持BBR的部署，但锐速应该是可以部署的，故增加了此部署脚本，加速后对速度的提升很明显，所以推荐部署加速脚本。该加速方法是开机自动启动，部署一次就可以了。
 第一步，先更换服务器内核：
+```
 yum -y install wget
 wget --no-check-certificate https://blog.asuhu.com/sh/ruisu.sh && bash ruisu.sh
- 
+``` 
 不动的时候敲回车键，在上图时需要多等一会儿。
  
 出现上图时表示已成功替换内核并服务器自动重启。
 完成后会重启，2分钟后重新连接服务器，连上后开始第二步的操作。
 第二步，一键安装锐速：
+```
 wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/serverspeeder/master/serverspeeder-all.sh && bash serverspeeder-all.sh
+```
 卸载加速代码命令为：
+```
 chattr -i /serverspeeder/etc/apx* && /serverspeeder/bin/serverSpeeder.sh uninstall -f
+```
 但有些内核是不适合的，部署过程中需要手动选择推荐的，当部署时出现以下字样：
  
 提示没有完全匹配的内核,随便选一个内核就行,按照提示来输入数字,按回车键即可
@@ -77,10 +84,13 @@ chattr -i /serverspeeder/etc/apx* && /serverspeeder/bin/serverSpeeder.sh uninsta
 ________________________________________
 【谷歌BBR加速教程】
 vultr服务器的centos6不支持bbr加速，但centos7系统支持bbr加速，所以如果你想用bbr加速教程，vps操作系统需要选择centos7。
+```
 yum -y install wget
 wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
 chmod +x bbr.sh
+
 ./bbr.sh
+```
 把上面整个代码复制后粘贴进去，不动的时候按回车，然后耐心等待，最后重启vps服务器即可。
 演示开始，如图：
 复制并粘贴代码后，按回车键确认
