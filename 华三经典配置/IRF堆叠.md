@@ -33,25 +33,22 @@ Warning: Renumbering the switch number may result in configuration change or los
 [SWB-Ten-GigabitEthernet2/0/50] save
 ```
 激活SWA和SWB的IRF端口配置：
+```
 [SWA-Ten-GigabitEthernet1/0/50] quit
 [SWA] irf-port-configuration active
 [SWB-Ten-GigabitEthernet2/0/50] quit
 [SWB] irf-port-configuration active
+```
 两台设备间将会进行Master竞选，竞选失败的一方将自动重启，重启完成后，IRF形成，系统名称统一为SWA,即为主设备的sysname.
-四、实验检测
-	1.IRF堆叠成功，SWB的系统名称变为SWA，与主设备SWA统一。
-	2.测试PCA或PCB与192.168.10.10通信。由于SWA与SWB形成IRF堆叠，管理地址为主设备即SWA的管理地址192.168.10.10 。
-	如果ping192.168.10.20将无法通信。（形成堆叠后地址被覆盖）
-	
-	 
-五、注意事项与总结
+### 四、实验检测
+1.IRF堆叠成功，SWB的系统名称变为SWA，与主设备SWA统一。
+2.测试PCA或PCB与192.168.10.10通信。由于SWA与SWB形成IRF堆叠，管理地址为主设备即SWA的管理地址192.168.10.10 。
+如果ping192.168.10.20将无法通信。（形成堆叠后地址被覆盖）
+### 五、注意事项与总结
 1. S3600V2-EI系列交换机和S3600V2-SI系列交换机只能与本系列内的设备建立IRF，这两个系列的设备之间无法建立IRF；
 2. 修改成员编号后要进行断电重启生效。
 3. IRF激活后会进行IRF竞选。选举规则：1、当前Master优于非Master 2、成员优先级大的优先 3、系统运行时间长的优先 4、成员MAC小的优先。
 	 
-	 
-	 
- 
 实验二：IRF结合BFD MAD检测
 一、实验组网
 	
