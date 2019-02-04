@@ -64,27 +64,32 @@ Warning: Renumbering the switch number may result in configuration change or los
 ```
 改完设备编号之后，重启设备 
 ### 2.在SWA上创建设备的IRF端口1/2，与物理端口T-GigabitEthernet1/0/50 绑定，并保存配置
-	[SWA] interface T 1/0/50
-	[SWA-Ten-GigabitEthernet1/0/50] shutdown
-	[SWA] irf-port 1/2
-	[SWA-irf-port1/2] port group t 1/0/50
-	[SWA-irf-port1/2] quit
-	[SWA] interface T 1/0/50
-	[SWA-Ten-GigabitEthernet1/0/50] undo shutdown
-	[SWA-Ten-GigabitEthernet1/0/50] save
-3.在SWB上创建设备的IRF端口2/1，绑定物理端口GigabitEthernet2/0/50，并保存配置
-	[SWB] interface t 2/0/50
-	[SWB-Ten-GigabitEthernet2/0/50] shutdown
-	[SWB] irf-port 2/1
-	[SWB-irf-port2/1] port group interface t 2/0/50
-	[SWB-irf-port2/1] quit
-	[SWB] interface t 2/0/50
-	[SWB-Ten-GigabitEthernet2/0/50] undo shutdown
-	[SWB-Ten-GigabitEthernet2/0/50] save
-4.激活SWA和SWB的IRF端口配置：
-	[SWA-Ten-GigabitEthernet1/0/50] quit
-	[SWA] irf-port-configuration active
-	[SWB-Ten-GigabitEthernet2/0/50] quit
+```
+[SWA] interface T 1/0/50
+[SWA-Ten-GigabitEthernet1/0/50] shutdown
+[SWA] irf-port 1/2
+[SWA-irf-port1/2] port group t 1/0/50
+[SWA-irf-port1/2] quit
+[SWA] interface T 1/0/50
+[SWA-Ten-GigabitEthernet1/0/50] undo shutdown
+[SWA-Ten-GigabitEthernet1/0/50] save
+```
+### 3.在SWB上创建设备的IRF端口2/1，绑定物理端口GigabitEthernet2/0/50，并保存配置
+```
+[SWB] interface t 2/0/50
+[SWB-Ten-GigabitEthernet2/0/50] shutdown
+[SWB] irf-port 2/1
+[SWB-irf-port2/1] port group interface t 2/0/50
+[SWB-irf-port2/1] quit
+[SWB] interface t 2/0/50
+[SWB-Ten-GigabitEthernet2/0/50] undo shutdown
+[SWB-Ten-GigabitEthernet2/0/50] save
+```
+### 4.激活SWA和SWB的IRF端口配置：
+```
+[SWA-Ten-GigabitEthernet1/0/50] quit
+[SWA] irf-port-configuration active
+[SWB-Ten-GigabitEthernet2/0/50] quit
 	[SWB] irf-port-configuration active
 两台设备间将会进行Master竞选，竞选失败的一方将自动重启，重启完成后，IRF形成，系统名称统一为SWA,即为主设备的sysname.
 5.配置BFD MAD检测
