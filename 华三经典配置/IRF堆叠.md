@@ -90,20 +90,22 @@ Warning: Renumbering the switch number may result in configuration change or los
 [SWA-Ten-GigabitEthernet1/0/50] quit
 [SWA] irf-port-configuration active
 [SWB-Ten-GigabitEthernet2/0/50] quit
-	[SWB] irf-port-configuration active
+[SWB] irf-port-configuration active
+```
 两台设备间将会进行Master竞选，竞选失败的一方将自动重启，重启完成后，IRF形成，系统名称统一为SWA,即为主设备的sysname.
-5.配置BFD MAD检测
-	创建VLAN 2，并将SW A 上的端口Gi1/0/1 和SW B 上的端口Gi2/0/1 加入VLAN 2中
-	[SWA] vlan 2
-	[SWA-vlan2] port Gi1/0/1 Gi 2/0/1
-	[SWA-vlan2] quit
-	创建VLAN2接口，并配置MAD IP 地址
-	[SWA] interface vlan-interface 2
-	[SWA-Vlan-interface2] mad bfd enable
-	[SWA-Vlan-interface2] mad ip address 192.168.2.1 24 member 1
-	[SWA-Vlan-interface2] mad ip address 192.168.2.2 24 member 2
-	[SWA-Vlan-interface2] quit
-	因为BFD MAD和生成树功能互斥，所以在Gi1/0/1 和Gi2/0/1 上关闭生成树协议
+### 5.配置BFD MAD检测
+创建VLAN 2，并将SW A 上的端口Gi1/0/1 和SW B 上的端口Gi2/0/1 加入VLAN 2中
+```
+[SWA] vlan 2
+[SWA-vlan2] port Gi1/0/1 Gi 2/0/1
+[SWA-vlan2] quit
+创建VLAN2接口，并配置MAD IP 地址
+[SWA] interface vlan-interface 2
+[SWA-Vlan-interface2] mad bfd enable
+[SWA-Vlan-interface2] mad ip address 192.168.2.1 24 member 1
+[SWA-Vlan-interface2] mad ip address 192.168.2.2 24 member 2
+[SWA-Vlan-interface2] quit
+因为BFD MAD和生成树功能互斥，所以在Gi1/0/1 和Gi2/0/1 上关闭生成树协议
 	[SWA] interface Gi 1/0/1
 	[SWA-Ethernet1/0/1] undo stp enable
 	[SWA-Ethernet1/0/1] quit
