@@ -3,23 +3,23 @@
 ## 二、实验要求
    实现SWA与SWB之间的IRF堆叠
 ## 三、实验配置
-1.SWA 保留缺省编号1，不需要进行配置；将SWB的成员编号修改为2。
-	<SWB> system-view
-	[SWB] irf member 1 renumber 2
-	Warning: Renumbering the switch number may result in configuration change or loss. Continue?[Y/N]:y
-	改完设备编号之后，重启设备 
-2.在SWA上创建设备的IRF端口1/2，与物理端口T-GigabitEthernet1/0/50 绑定，并保存配置
-	[SWA] interface T-gigabitethernet 1/0/50
-	[SWA-Ten-GigabitEthernet1/0/50] shutdown
-	[SWA] irf-port 1/2
-	[SWA-irf-port1/2] port group interface T-gigabitethernet 1/0/50
-	[SWA-irf-port1/2] quit
-	[SWA] interface T-gigabitethernet 1/0/50
-	[SWA-Ten-GigabitEthernet1/0/50] undo shutdown
-	[SWA-Ten-GigabitEthernet1/0/50] save
-3.在SWB上创建设备的IRF端口2/1，绑定物理端口GigabitEthernet2/0/50，并保存配置
-	[SWB] interface T-gigabitethernet 2/0/50
-	[SWB-Ten-GigabitEthernet2/0/50] shutdown
+### 1.SWA 保留缺省编号1，不需要进行配置；将SWB的成员编号修改为2。
+<SWB> system-view
+[SWB] irf member 1 renumber 2
+Warning: Renumbering the switch number may result in configuration change or loss. Continue?[Y/N]:y
+改完设备编号之后，重启设备 
+### 2.在SWA上创建设备的IRF端口1/2，与物理端口T-GigabitEthernet1/0/50 绑定，并保存配置
+[SWA] interface T-gigabitethernet 1/0/50
+[SWA-Ten-GigabitEthernet1/0/50] shutdown
+[SWA] irf-port 1/2
+[SWA-irf-port1/2] port group interface T-gigabitethernet 1/0/50
+[SWA-irf-port1/2] quit
+[SWA] interface T-gigabitethernet 1/0/50
+[SWA-Ten-GigabitEthernet1/0/50] undo shutdown
+[SWA-Ten-GigabitEthernet1/0/50] save
+### 3.在SWB上创建设备的IRF端口2/1，绑定物理端口GigabitEthernet2/0/50，并保存配置
+[SWB] interface T-gigabitethernet 2/0/50
+[SWB-Ten-GigabitEthernet2/0/50] shutdown
 	[SWB] irf-port 2/1
 	[SWB-irf-port2/1] port group interface T-gigabitethernet 2/0/50
 	[SWB-irf-port2/1] quit
