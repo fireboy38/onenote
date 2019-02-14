@@ -41,8 +41,7 @@ interface range GigabitEthernet 1/0/1 to GigabitEthernet 1/0/4
  port trunk permit vlan all
 quit
 
-#为0/0/13端口到0/0/20端口批量配置用于ap
-
+#为0/0/13端口到0/0/20端口批量配置
 interface range GigabitEthernet 1/0/5 to GigabitEthernet 1/0/27
  port access vlan 30
 quit
