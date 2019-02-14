@@ -1,0 +1,47 @@
+  # 为交换机命令
+  sys beihushiyan_MSR3660
+
+ ssh server enable
+
+#添加acl，用于nat地址转换
+acl basic 2000
+ rule 5 permit
+quit
+
+#为端口0/0配置ip信息
+#combo enable copper/fiber  copper启动电口/fiber启动光口
+interface GigabitEthernet0/0
+ port link-mode route
+ combo enable copper
+ ip address 10.12.254.18 255.255.255.252
+
+#为端口0/1配置ip信息
+interface GigabitEthernet0/1
+ port link-mode route
+ description to_s5560_ge1/0/24
+ combo enable fiber
+ ip address 10.12.32.2 255.255.255.0
+
+#为端口0/2配置ip信息
+interface GigabitEthernet0/2
+ port link-mode route
+ description to_old_internet
+ ip address 192.168.7.253 255.255.255.0
+ nat outbound 2000
+
+#添加两条路由信息，一个缺省路由到外网网关，一条本路路由到S7503
+ip route-static 0.0.0.0 0 192.168.7.1
+ip route-static 10.12.32.0 21 10.12.32.1
+
+#添加远程管理的用户
+local-user admin
+password simple admin@fsjy
+ service-type ssh
+ authorization-attribute user-role level-015
+ quit
+line vty 0 63
+authentication-mode scheme
+quit
+
+ #保存命令  save，请检查无误后保存当前配置
+ #请手动输入save保存

@@ -1,0 +1,78 @@
+  
+  # 为交换机命令
+  sys jieru7
+
+  #新建vlan10到vlan80
+  #vlan10 管理网络
+  vlan 10
+
+  #vlan20 办公网络
+  vlan 20
+
+  #vlan30 班班通网络
+  vlan 30
+
+  #vlan40 微机室网络
+  vlan 40
+
+  #vlan50 AP业务网络
+  vlan 50
+
+  #vlan60 预留监控网络
+  vlan 60
+
+  #vlan70 预留广播网络
+  vlan 70
+
+  #vlan80 预留网络
+  vlan 80 
+
+  #为vlan10添加IP，用于远程管理使用
+  int vlan10
+  ip address 10.12.8.10 24
+  qu
+
+  #增加缺省路由，用户管理使用
+  ip route-s 0.0.0.0 0.0.0.0 10.12.8.1
+
+  #新建组1，组1用于交换机上联接口或者下联接口
+  port-group manual 1
+  group-member GigabitEthernet 1/0/1 to GigabitEthernet 1/0/1
+  port link-type trunk
+  port trunk permit vlan all
+  qu
+
+  #新建组2，组2用于交换机上业务网络，并且为这些网络划分业务网段
+  port-group manual 2
+  group-member GigabitEthernet 1/0/2 to GigabitEthernet 1/0/20
+  port access vlan 20
+  qu
+  
+
+  #新建组4，组4用于交换机上AP使用，并且为这些网络划分业务网段
+  port-group manual 4
+  group-member GigabitEthernet 1/0/21 to GigabitEthernet 1/0/24
+  port link-type trunk
+  port trunk permit vlan all
+  port trunk pvid vlan 10
+  undo port trunk permit vlan 1
+  qu
+
+  #新建远程管理用户和服务
+  local-user admin
+  password simple admin@fsjy
+  service-type ssh
+  authorization-attribute level 3
+  qu
+  ssh server enable
+  user-interface vty 0 15
+  authentication-mode scheme
+  qu
+
+  #保存命令  save，请检查无误后保存当前配置
+  #请手动输入save保存
+
+
+
+
+

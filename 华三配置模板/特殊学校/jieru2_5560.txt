@@ -1,0 +1,74 @@
+  
+  # 为交换机命令
+  sys jieru2
+
+  #新建vlan10到vlan80
+  #vlan10 管理网络
+  vlan 10
+
+  #vlan20 办公网络
+  vlan 20
+
+  #vlan30 班班通网络
+  vlan 30
+
+  #vlan40 微机室网络
+  vlan 40
+
+  #vlan50 AP业务网络
+  vlan 50
+
+  #vlan60 预留监控网络
+  vlan 60
+
+  #vlan70 预留广播网络
+  vlan 70
+
+  #vlan80 预留网络
+  vlan 80 
+
+  #为vlan10添加ip用于远程管理使用
+  int vlan10
+  ip address 10.12.112.4 24
+
+  #添加缺省路由
+  ip route-static 0.0.0.0 0.0.0.0 10.12.112.1
+
+#为1/0/1端口到1/0/3用于上联或者下联交换机使用
+
+interface range GigabitEthernet 1/0/1 to GigabitEthernet 1/0/1
+ port link-type trunk 
+ port trunk permit vlan all
+quit
+
+#为0/0/1端口到0/0/12端口批量配置
+
+interface range GigabitEthernet 1/0/2 to GigabitEthernet 1/0/23 
+ port access vlan 30
+quit
+
+#为0/0/13端口到0/0/20端口批量配置用于ap
+
+interface range GigabitEthernet 1/0/24 to GigabitEthernet 1/0/28
+ port link-type trunk 
+ port trunk permit vlan all
+port trunk pvid vlan 10
+undo port trunk permit vlan 1
+quit
+
+#如果是光口要进去端口修改光电模式
+#interface GigabitEthernet1/0/28
+#combo enable fiber
+#quit
+
+#新建用户
+ local-user admin
+ password simple admin@fsjy
+ service-type ssh
+ authorization-attribute user-role level-15
+ quit
+ line vty 0 63
+ authentication-mode scheme 
+ quit
+ ssh server enable 
+
