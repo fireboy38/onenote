@@ -1,6 +1,8 @@
   
   # 为交换机命令
-  sys jieru5
+  sys 5560
+  ip http enable
+  ip https enable
 
   #新建vlan10到vlan80
   #vlan10 管理网络
@@ -36,34 +38,30 @@
 
 #端口批量配置
 
-interface range GigabitEthernet 1/0/1 to GigabitEthernet 1/0/20
+interface range GigabitEthernet 1/0/1 to GigabitEthernet 1/0/12
  port link-type trunk 
  port trunk permit vlan all
 quit
 
+#端口批量配置用于业务
+
+interface range GigabitEthernet 1/0/13 to GigabitEthernet 1/0/28
+ port link-type access
+ port access vlan 30
+quit
+
 #批量配置用于业务
 
-interface range GigabitEthernet 1/0/21 to GigabitEthernet 1/0/26
-port access vlan 30
+interface range ten-GigabitEthernet 1/0/29 to ten-GigabitEthernet 1/0/32
+ port link-type trunk 
+ port trunk permit vlan all
 quit
 
-#批量配置用于上联或者下联交换机使用
-
-interface range GigabitEthernet 1/0/28 to GigabitEthernet 1/0/28
-port link-type trunk 
-port trunk permit vlan all
-port trunk pvid vlan 10
-quit
-
-#如果是光口要进去端口修改光电模式
-interface GigabitEthernet1/0/28
-combo enable fiber
-quit
 
 #新建用户
  local-user admin
  password simple admin@fsjy
- service-type ssh
+ service-type ssh telnet http https
  authorization-attribute user-role level-15
  quit
  line vty 0 63

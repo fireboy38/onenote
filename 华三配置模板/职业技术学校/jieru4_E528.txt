@@ -1,6 +1,8 @@
   
   # 为交换机命令
-  sysjieru4
+  sys jieru4
+  ip http enable
+  ip https enable
 
   #新建vlan10到vlan80
   #vlan10 管理网络
@@ -44,14 +46,14 @@
 
   #新建组2，组2用于交换机上业务网络，并且为这些网络划分业务网段
   port-group manual 2
-  group-member GigabitEthernet 1/0/2 to GigabitEthernet 1/0/20
+  group-member GigabitEthernet 1/0/2 to GigabitEthernet 1/0/23
   port access vlan 20
   qu
   
 
   #新建组4，组4用于交换机上AP使用，并且为这些网络划分业务网段
   port-group manual 4
-  group-member GigabitEthernet 1/0/21 to GigabitEthernet 1/0/24
+  group-member GigabitEthernet 1/0/24 to GigabitEthernet 1/0/24
   port link-type trunk
   port trunk permit vlan all
   port trunk pvid vlan 10
@@ -61,7 +63,8 @@
   #新建远程管理用户和服务
   local-user admin
   password simple admin@fsjy
-  service-type ssh
+  service-type ssh telnet 
+   service-type web
   authorization-attribute level 3
   qu
   ssh server enable
